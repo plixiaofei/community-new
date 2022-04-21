@@ -1,0 +1,22 @@
+DELETE question
+
+PUT /question
+{
+    "mappings": {
+        "properties": {
+            "id": {
+                "type": "long"
+            },
+            "title": {
+                "type": "text",
+                    "analyzer": "ik_smart"
+            },
+            "shortDescription": {
+                "type": "text",
+                    "analyzer": "ik_smart"
+            }
+        }
+    }
+}
+
+GET /question

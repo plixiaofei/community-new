@@ -1,0 +1,62 @@
+version: "3.9"
+services:
+
+  # redis01
+  redis01:
+    image: redis:latest
+    container_name: community-new-redis01
+    hostname: community-new-redis01
+    ports:
+      - '6379:6379'
+    volumes:
+      - community-new-redis01:/etc/redis
+
+  # rabbitmq01
+  rabbitmq01:
+    image: rabbitmq:3.9-management
+    container_name: community-new-rabbitmq01
+    hostname: community-new-rabbitmq01
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - community-new-rabbitmq01:/etc/rabbitmq
+
+  nginx01:
+    image: nginx:latest
+    container_name: community-new-nginx01
+    hostname: community-new-nginx01
+    ports:
+      - "8000:80"
+    volumes:
+      - /Users/plixiaofei/Documents/Program/Project/community-new/frontend/dist:/usr/share/nginx/html
+      - /Users/plixiaofei/Documents/Program/Project/community-new/backend/main/community-new/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /Users/plixiaofei/Documents/Program/Project/community-new/backend/main/community-new/nginx/logs:/var/log/nginx
+
+  elasticsearch01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.2
+    container_name: community-new-elasticsearch01
+    hostname: community-new-elasticsearch01
+    ports:
+      - "9300:9300"
+      - "9200:9200"
+
+#  elasticsearch02:
+#    image: elasticsearch:8.1.2
+#    container_name: community-new-elasticsearch02
+#    hostname: community-new-elasticsearch02
+#    ports:
+#      - "9301:9300"
+#      - "9201:9200"
+
+  kibana01:
+    image: docker.elastic.co/kibana/kibana:8.1.2
+    container_name: community-new-kibana01
+    hostname: community-new-kibana01
+    ports:
+      - "5601:5601"
+
+
+volumes:
+  community-new-redis01:
+  community-new-rabbitmq01:

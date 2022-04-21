@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  rabbitmq:
+    username: community
+    password: community
+    virtual-host: /community
+    host: localhost
+    port: 5672
+    publisher-returns: true
+    publisher-confirm-type: correlated
+
+  redis:
+    host: localhost
+    port: 6379
+
+  datasource:
+    username: root
+    password: li13526282136
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/community_new?useUnicode=true&characterEncoding=UTF-8&serverTimeZone=Asia/Shanghai
+
+  elasticsearch:
+    username: elastic
+    uris: http://localhost:9201
+
+
+front: http://localhost:8000
+front_test: http://localhost:8001
+
+jwtKey: 123456
+
+storage:
+  user:
+    avatar: "/Users/plixiaofei/Documents/Program/Project/community-new/avatar/"

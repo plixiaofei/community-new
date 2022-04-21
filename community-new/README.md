@@ -1,0 +1,1 @@
+1. @Value 不能用 static 修饰，得到结果为 null
