@@ -13,11 +13,16 @@ public class MyConfig implements WebMvcConfigurer {
 
     @Value("${storage.user.avatar}")
     private String userAvatar;
+    @Value("${storage.questionImg}")
+    private String questionImg;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/user/avatar/**")
                 .addResourceLocations("file:" + userAvatar);
+
+        registry.addResourceHandler("/questionImg/**")
+                .addResourceLocations("file:" + questionImg);
         WebMvcConfigurer.super.addResourceHandlers(registry);
     }
 }

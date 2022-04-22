@@ -1,16 +1,28 @@
 package com.plixiaofei.community.controller;
 
+import com.auth0.jwt.interfaces.Claim;
 import com.plixiaofei.community.domain.dto.PublishQuestionDTO;
 import com.plixiaofei.community.domain.model.Question;
 import com.plixiaofei.community.domain.model.Result;
 import com.plixiaofei.community.domain.vo.QuestionVO;
 import com.plixiaofei.community.enumeration.ResultCode;
 import com.plixiaofei.community.service.QuestionService;
+import com.plixiaofei.community.util.JwtUtil;
+import com.plixiaofei.community.util.MyUtil;
+import com.sun.tools.jconsole.JConsoleContext;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created on 2022/4/14 by plixiaofei
@@ -27,8 +39,17 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/api/publishQuestion", method = RequestMethod.POST)
-    public Result<Object> publishQuestion(@RequestBody PublishQuestionDTO questionDTO) {
-        questionService.saveQuestion(questionDTO);
+    public Result<Object> publishQuestion(HttpServletRequest request,
+                                          @RequestBody PublishQuestionDTO questionDTO) {
+        System.out.println(questionDTO);
+        String authorization = request.getHeader("Authorization").split("\"")[1];
+        System.out.println(authorization);
+        String username = "";
+        if (JwtUtil.verifyToken(authorization)) {
+            username = JwtUtil.getTokenClaims(authorization).get("username").asString();
+            System.out.println(username);
+        }
+        questionService.saveQuestion(username, questionDTO);
         return new Result<>(ResultCode.SUCCESS, questionDTO);
     }
 
@@ -50,5 +71,21 @@ public class QuestionController {
     public Result<Object> searchQuestion(@RequestParam("word") String word) {
         List<QuestionVO> data = questionService.searchQuestion(word);
         return new Result<>(ResultCode.SUCCESS, data);
+    }
+
+    @Value("${storage.questionImg}")
+    private String storePath;
+    // 上传文件回传地址
+    @RequestMapping(value = "/api/uploadImg", method = RequestMethod.POST)
+    public Result<Object> uploadImg(@RequestParam("questionImg") MultipartFile questionImg) {
+        System.out.println(questionImg.getSize());
+        String randomImgName = MyUtil.randomFileName(questionImg.getOriginalFilename());
+        Path dest = Paths.get(storePath, randomImgName);
+        try {
+            questionImg.transferTo(dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new Result<>(ResultCode.SUCCESS, dest.toString());
     }
 }

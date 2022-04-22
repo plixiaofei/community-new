@@ -5,11 +5,7 @@ package com.plixiaofei.community.domain.dto;
  */
 public class PublishQuestionDTO {
 
-    /**
-     * 发帖用户名
-     */
-    private String username;
-
+    private String title;
     /**
      * 问题简单描述
      */
@@ -20,7 +16,6 @@ public class PublishQuestionDTO {
      */
     private String fullDescription;
 
-    private String title;
 
     public String getTitle() {
         return title;
@@ -28,14 +23,6 @@ public class PublishQuestionDTO {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getShortDescription() {
@@ -58,7 +45,6 @@ public class PublishQuestionDTO {
     @Override
     public String toString() {
         return "PublishQuestionDTO{" +
-                "username='" + username + '\'' +
                 ", shortDescription='" + shortDescription + '\'' +
                 ", fullDescription='" + fullDescription + '\'' +
                 ", title='" + title + '\'' +

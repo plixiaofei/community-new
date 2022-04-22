@@ -49,14 +49,15 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
 
     @Override
     @Transactional
-    public void saveQuestion(PublishQuestionDTO questionDTO) {
+    public void saveQuestion(String username, PublishQuestionDTO questionDTO) {
         List<String> usernames = userService.list().stream().map(User::getUsername).collect(Collectors.toList());
-        if (!usernames.contains(questionDTO.getUsername())) {
+        if (!usernames.contains(username)) {
             throw new CustomException(ResultCode.USER_NOT_EXISTS);
         }
         Question question = new Question();
         BeanUtils.copyProperties(questionDTO, question);
         Date currentTime = new Date(System.currentTimeMillis());
+        question.setUsername(username);
         question.setCreateTime(currentTime);
         question.setUpdateTime(currentTime);
         question.setIsDeleted(0);

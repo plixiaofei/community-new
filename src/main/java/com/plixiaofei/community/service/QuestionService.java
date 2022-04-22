@@ -14,7 +14,7 @@ import java.util.List;
 */
 public interface QuestionService extends IService<Question> {
 
-    void saveQuestion(PublishQuestionDTO question);
+    void saveQuestion(String username, PublishQuestionDTO question);
 
     List<QuestionVO> listQuestion(int curPage);
 
