@@ -38,11 +38,6 @@ public class User implements Serializable {
     private String icon;
 
     /**
-     * 用户昵称
-     */
-    private String nickName;
-
-    /**
      * 逻辑删除
      */
     @TableLogic
@@ -137,20 +132,6 @@ public class User implements Serializable {
     }
 
     /**
-     * 用户昵称
-     */
-    public String getNickName() {
-        return nickName;
-    }
-
-    /**
-     * 用户昵称
-     */
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    /**
      * 逻辑删除
      */
     public Integer getIsDeleted() {
@@ -223,7 +204,6 @@ public class User implements Serializable {
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
-            && (this.getNickName() == null ? other.getNickName() == null : this.getNickName().equals(other.getNickName()))
             && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()))
             && (this.getIsLocked() == null ? other.getIsLocked() == null : this.getIsLocked().equals(other.getIsLocked()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
@@ -239,7 +219,6 @@ public class User implements Serializable {
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getIcon() == null) ? 0 : getIcon().hashCode());
-        result = prime * result + ((getNickName() == null) ? 0 : getNickName().hashCode());
         result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
         result = prime * result + ((getIsLocked() == null) ? 0 : getIsLocked().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
@@ -258,7 +237,6 @@ public class User implements Serializable {
         sb.append(", password=").append(password);
         sb.append(", email=").append(email);
         sb.append(", icon=").append(icon);
-        sb.append(", nickName=").append(nickName);
         sb.append(", isDeleted=").append(isDeleted);
         sb.append(", isLocked=").append(isLocked);
         sb.append(", createTime=").append(createTime);

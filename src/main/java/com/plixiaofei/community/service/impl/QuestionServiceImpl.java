@@ -19,6 +19,7 @@ import com.plixiaofei.community.service.QuestionService;
 import com.plixiaofei.community.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,8 @@ import java.util.stream.Collectors;
 @Service
 public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     implements QuestionService{
+    @Value("${page.question}")
+    private Integer QUESTION_EACH_PAGE;
 
     @Autowired
     private ElasticsearchClient esClient;
@@ -81,14 +84,13 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     public List<QuestionVO> listQuestion(int curPage) {
         QueryWrapper<Question> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("create_time");
-        Page<Question> page = questionMapper.selectPage(new Page<>(curPage, 8), queryWrapper);
+        Page<Question> page = questionMapper.selectPage(new Page<>(curPage, QUESTION_EACH_PAGE), queryWrapper);
         List<QuestionVO> questionVOS = new ArrayList<>();
         for (Question question: page.getRecords()) {
             QuestionVO temp = new QuestionVO();
             BeanUtils.copyProperties(question, temp);
             questionVOS.add(temp);
         }
-
         return questionVOS;
     }
 

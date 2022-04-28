@@ -50,7 +50,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         Date nowTime = new Date(System.currentTimeMillis());
         user.setCreateTime(nowTime);
         user.setLoginTime(nowTime);
-        user.setNickName(user.getUsername());
         if (usernames.contains(user.getUsername())) {
             throw new CustomException(ResultCode.USERNAME_EXISTS);
         } else {
@@ -132,7 +131,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             userVO.setEmail(originUser.getEmail());
             userVO.setIcon(originUser.getIcon());
             originUser.setUsername(userVO.getUsername());
-            originUser.setNickName(userVO.getNickName());
             int updateStatus = userMapper.updateById(originUser);
             if (updateStatus == 0) {
                 log.warn("{} 修改资料失败", userVO.getUsername());

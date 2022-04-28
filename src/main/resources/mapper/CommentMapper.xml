@@ -10,10 +10,11 @@
             <result property="fromUsername" column="from_username" jdbcType="VARCHAR"/>
             <result property="toUsername" column="to_username" jdbcType="VARCHAR"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="commentTime" column="comment_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,question_id,from_username,
-        to_username,content
+        to_username,content,comment_time
     </sql>
 </mapper>

@@ -10,11 +10,6 @@ public class UserVO {
     private String username;
 
     /**
-     * 用户昵称
-     */
-    private String nickName;
-
-    /**
      * 用户邮箱
      */
     private String email;
@@ -48,21 +43,12 @@ public class UserVO {
         this.icon = icon;
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
     @Override
     public String toString() {
         return "UserVO{" +
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", icon='" + icon + '\'' +
-                ", nickName='" + nickName + '\'' +
                 '}';
     }
 }

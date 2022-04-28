@@ -1,6 +1,5 @@
 package com.plixiaofei.community.controller;
 
-import com.auth0.jwt.interfaces.Claim;
 import com.plixiaofei.community.domain.dto.PublishQuestionDTO;
 import com.plixiaofei.community.domain.model.Question;
 import com.plixiaofei.community.domain.model.Result;
@@ -9,7 +8,6 @@ import com.plixiaofei.community.enumeration.ResultCode;
 import com.plixiaofei.community.service.QuestionService;
 import com.plixiaofei.community.util.JwtUtil;
 import com.plixiaofei.community.util.MyUtil;
-import com.sun.tools.jconsole.JConsoleContext;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,9 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created on 2022/4/14 by plixiaofei
@@ -38,12 +34,16 @@ public class QuestionController {
         return new Result<>(ResultCode.SUCCESS, questions);
     }
 
+    @RequestMapping(value = "/api/getQuestionCount", method = RequestMethod.GET)
+    public Result<Object> getQuestionCount() {
+        int size = questionService.list().size();
+        return new Result<>(ResultCode.SUCCESS, size);
+    }
+
     @RequestMapping(value = "/api/publishQuestion", method = RequestMethod.POST)
     public Result<Object> publishQuestion(HttpServletRequest request,
                                           @RequestBody PublishQuestionDTO questionDTO) {
-        System.out.println(questionDTO);
         String authorization = request.getHeader("Authorization").split("\"")[1];
-        System.out.println(authorization);
         String username = "";
         if (JwtUtil.verifyToken(authorization)) {
             username = JwtUtil.getTokenClaims(authorization).get("username").asString();

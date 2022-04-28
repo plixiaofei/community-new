@@ -10,11 +10,6 @@ public class CommentDTO {
     private Long questionId;
 
     /**
-     * 评论目标用户
-     */
-    private String toUsername;
-
-    /**
      * 评论内容
      */
     private String content;
@@ -25,14 +20,6 @@ public class CommentDTO {
 
     public void setQuestionId(Long questionId) {
         this.questionId = questionId;
-    }
-
-    public String getToUsername() {
-        return toUsername;
-    }
-
-    public void setToUsername(String toUsername) {
-        this.toUsername = toUsername;
     }
 
     public String getContent() {
@@ -47,7 +34,6 @@ public class CommentDTO {
     public String toString() {
         return "CommentDTO{" +
                 "questionId=" + questionId +
-                ", toUsername='" + toUsername + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }

@@ -12,6 +12,7 @@ spring:
     publisher-returns: true
     publisher-confirm-type: correlated
 
+
   redis:
     host: localhost
     port: 6379
@@ -30,6 +31,14 @@ spring:
     multipart:
       max-file-size: 2MB
       max-request-size: 2MB
+  mail:
+    host: smtp.qq.com
+    port: 587
+    protocol: smtp
+    username: 1148205230@qq.com
+    password: nmozukqkrxvaihea
+
+
 
 front: http://localhost:8000
 front_test: http://localhost:8001
@@ -40,3 +49,23 @@ storage:
   user:
     avatar: "/Users/plixiaofei/Documents/Program/Project/community-new/avatar/"
   questionImg: "/Users/plixiaofei/Documents/Program/Project/community-new/questionImg/"
+
+
+rabbitmq:
+  notify:
+    exchange:
+      at.exchange
+    queue:
+      at: at.queue
+      reply: at.reply
+
+mail:
+  from: 1148205230@qq.com
+  to: 1148205230@qq.com
+  list:
+    rabbitmq-at:
+      "服务器管理 - 消息队列 @ 相关"
+
+page:
+  question: 8
+  notification: 10

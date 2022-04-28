@@ -8,127 +8,146 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户评论表
- * @TableName comment
+ * 通知表
+ * @TableName notification
  */
-@TableName(value ="comment")
-public class Comment implements Serializable {
+@TableName(value ="notification")
+public class Notification implements Serializable {
     /**
-     * 评论Id
+     * 通知 id
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 问题Id
+     * 问题 id
      */
     private Long questionId;
 
     /**
-     * 评论用户
+     * 评论 id
      */
-    private String fromUsername;
+    private Long commentId;
 
     /**
-     * 评论目标用户
+     * 发起通知用户
      */
-    private String toUsername;
+    private String fromUser;
 
     /**
-     * 评论内容
+     * 目标用户
+     */
+    private String toUser;
+
+    /**
+     * 通知内容
      */
     private String content;
 
     /**
-     * 评论时间
+     * 通知时间
      */
-    private Date commentTime;
+    private Date createTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
     /**
-     * 评论Id
+     * 通知 id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * 评论Id
+     * 通知 id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * 问题Id
+     * 问题 id
      */
     public Long getQuestionId() {
         return questionId;
     }
 
     /**
-     * 问题Id
+     * 问题 id
      */
     public void setQuestionId(Long questionId) {
         this.questionId = questionId;
     }
 
     /**
-     * 评论用户
+     * 评论 id
      */
-    public String getFromUsername() {
-        return fromUsername;
+    public Long getCommentId() {
+        return commentId;
     }
 
     /**
-     * 评论用户
+     * 评论 id
      */
-    public void setFromUsername(String fromUsername) {
-        this.fromUsername = fromUsername;
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 
     /**
-     * 评论目标用户
+     * 发起通知用户
      */
-    public String getToUsername() {
-        return toUsername;
+    public String getFromUser() {
+        return fromUser;
     }
 
     /**
-     * 评论目标用户
+     * 发起通知用户
      */
-    public void setToUsername(String toUsername) {
-        this.toUsername = toUsername;
+    public void setFromUser(String fromUser) {
+        this.fromUser = fromUser;
     }
 
     /**
-     * 评论内容
+     * 目标用户
+     */
+    public String getToUser() {
+        return toUser;
+    }
+
+    /**
+     * 目标用户
+     */
+    public void setToUser(String toUser) {
+        this.toUser = toUser;
+    }
+
+    /**
+     * 通知内容
      */
     public String getContent() {
         return content;
     }
 
     /**
-     * 评论内容
+     * 通知内容
      */
     public void setContent(String content) {
         this.content = content;
     }
 
     /**
-     * 评论时间
+     * 通知时间
      */
-    public Date getCommentTime() {
-        return commentTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
-     * 评论时间
+     * 通知时间
      */
-    public void setCommentTime(Date commentTime) {
-        this.commentTime = commentTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     @Override
@@ -142,13 +161,14 @@ public class Comment implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Comment other = (Comment) that;
+        Notification other = (Notification) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getQuestionId() == null ? other.getQuestionId() == null : this.getQuestionId().equals(other.getQuestionId()))
-            && (this.getFromUsername() == null ? other.getFromUsername() == null : this.getFromUsername().equals(other.getFromUsername()))
-            && (this.getToUsername() == null ? other.getToUsername() == null : this.getToUsername().equals(other.getToUsername()))
+            && (this.getCommentId() == null ? other.getCommentId() == null : this.getCommentId().equals(other.getCommentId()))
+            && (this.getFromUser() == null ? other.getFromUser() == null : this.getFromUser().equals(other.getFromUser()))
+            && (this.getToUser() == null ? other.getToUser() == null : this.getToUser().equals(other.getToUser()))
             && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
-            && (this.getCommentTime() == null ? other.getCommentTime() == null : this.getCommentTime().equals(other.getCommentTime()));
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
     }
 
     @Override
@@ -157,10 +177,11 @@ public class Comment implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getQuestionId() == null) ? 0 : getQuestionId().hashCode());
-        result = prime * result + ((getFromUsername() == null) ? 0 : getFromUsername().hashCode());
-        result = prime * result + ((getToUsername() == null) ? 0 : getToUsername().hashCode());
+        result = prime * result + ((getCommentId() == null) ? 0 : getCommentId().hashCode());
+        result = prime * result + ((getFromUser() == null) ? 0 : getFromUser().hashCode());
+        result = prime * result + ((getToUser() == null) ? 0 : getToUser().hashCode());
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
-        result = prime * result + ((getCommentTime() == null) ? 0 : getCommentTime().hashCode());
+        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         return result;
     }
 
@@ -172,10 +193,11 @@ public class Comment implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", questionId=").append(questionId);
-        sb.append(", fromUsername=").append(fromUsername);
-        sb.append(", toUsername=").append(toUsername);
+        sb.append(", commentId=").append(commentId);
+        sb.append(", fromUser=").append(fromUser);
+        sb.append(", toUser=").append(toUser);
         sb.append(", content=").append(content);
-        sb.append(", commentTime=").append(commentTime);
+        sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
