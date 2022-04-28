@@ -19,7 +19,7 @@ spring:
 
   datasource:
     username: root
-    password: li13526282136
+    password: ****************
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/community_new?useUnicode=true&characterEncoding=UTF-8&serverTimeZone=Asia/Shanghai
 
@@ -36,7 +36,7 @@ spring:
     port: 587
     protocol: smtp
     username: 1148205230@qq.com
-    password: nmozukqkrxvaihea
+    password: ****************
 
 
 
